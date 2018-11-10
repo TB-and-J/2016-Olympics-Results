@@ -22,7 +22,6 @@ CREATE TABLE athlete(
     height INT,
     weight INT,
     country_id INT,
-    medal_count INT,
     sport_id INT,
     FOREIGN KEY (country_id)
 		REFERENCES country(id)
@@ -35,12 +34,19 @@ CREATE TABLE athlete(
 );
 
 CREATE TABLE medal(
-	id INT AUTO_INCREMENT PRIMARY KEY,
-    athelete_id INT,
+    athlete_id INT,
     country_id INT,
     gold_count INT,
     silver_count INT,
-    bronze_count INT
+    bronze_count INT,
+    FOREIGN KEY (athlete_id)
+		REFERENCES athlete(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+	FOREIGN KEY (country_id)
+		REFERENCES country(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE event(
